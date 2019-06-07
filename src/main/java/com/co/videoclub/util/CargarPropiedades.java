@@ -1,0 +1,58 @@
+package com.co.videoclub.util;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+/**
+ *
+ * @author davigofr
+ */
+public class CargarPropiedades {
+
+    private Properties propiedades;
+    private InputStream input;
+    private static CargarPropiedades cargarPropiedades;
+
+    private CargarPropiedades() {
+        propiedades = new Properties();
+    }
+
+    public static CargarPropiedades getCargarPropiedades() {
+        if (cargarPropiedades == null) {
+            cargarPropiedades = new CargarPropiedades();
+        }
+        return cargarPropiedades;
+    }
+
+    public void cargarPropiedades(String nombreArchivo) throws IOException {
+        try {
+            input = getCargarPropiedades().getClass()
+                    .getClassLoader().getResourceAsStream(nombreArchivo);
+
+            if (input == null) {
+                throw new IOException("No se logró cargar el archivo");
+            }
+
+            propiedades.load(input);
+        }catch(IOException e){
+            throw new IOException(e.getMessage());
+        }finally{
+            if (input != null){
+                input.close();
+            }
+        }
+    }
+    
+    public String getPropiedad(String propiedad){
+        if(propiedad == null || propiedad.isEmpty()){
+            return null;
+        }
+        
+        return propiedades.getProperty(propiedad);
+    }
+
+    public void setPropiedades(Properties propiedades) {
+        this.propiedades = propiedades;
+    }
+}
