@@ -213,10 +213,7 @@ public class NuevaPelicula extends javax.swing.JDialog {
     }//GEN-LAST:event_jTFAñoPKeyPressed
 
     private void jTFAñoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFAñoPKeyTyped
-        char a = evt.getKeyChar();
-        if (!Character.isDigit(a) || this.jTFAñoP.getText().length() >= 4) {
-            evt.consume();
-        }
+
     }//GEN-LAST:event_jTFAñoPKeyTyped
 
     private void jGuardarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarPActionPerformed
