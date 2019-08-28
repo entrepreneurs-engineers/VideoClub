@@ -1,7 +1,10 @@
 package com.co.videoclub.util;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 /**
@@ -25,11 +28,12 @@ public class CargarPropiedades {
         return cargarPropiedades;
     }
 
-    public void cargarPropiedades(String nombreArchivo) throws IOException {
+    public void cargarPropiedades(String nombreArchivo) throws IOException, URISyntaxException {
         try {
-            input = getCargarPropiedades().getClass()
-                    .getClassLoader().getResourceAsStream(nombreArchivo);
-
+            String ruta = getClass().getProtectionDomain().getCodeSource()
+                    .getLocation().toURI().getPath().split("target/")[0];
+            input = new FileInputStream(new File(ruta,nombreArchivo));
+            
             if (input == null) {
                 throw new IOException("No se logró cargar el archivo");
             }
