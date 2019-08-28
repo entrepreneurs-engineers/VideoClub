@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.co.videoclub.util.CargarPropiedades;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +33,7 @@ public class ConexionMySQL implements Conexion {
             dataBase = CARGADOR.getPropiedad(DATA_BASE);
             usuario = CARGADOR.getPropiedad(USUARIO);
             password = CARGADOR.getPropiedad(PASSWORD);
-        } catch (IOException ex) {
+        } catch (IOException | URISyntaxException ex) {
             System.out.println("Hubo un error al cargar el archivo de propiedades: "
                     + ex.getMessage());
         }

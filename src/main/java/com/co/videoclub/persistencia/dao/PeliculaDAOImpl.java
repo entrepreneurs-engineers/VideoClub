@@ -14,7 +14,10 @@ import com.co.videoclub.persistencia.dto.Categoria;
 import com.co.videoclub.persistencia.dto.Pelicula;
 import com.co.videoclub.util.CargarPropiedades;
 import com.co.videoclub.util.ConstantesBD;
+import java.net.URISyntaxException;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase que orquesta todas las operaciones de las peliculas (CRUD)
@@ -39,7 +42,7 @@ public class PeliculaDAOImpl implements PeliculaDAO {
             insertarPeliculaSQL = CARGADOR.getPropiedad(ConstantesBD.INSERTAR_PELICULA);
             actualizarPeliculaSQL = CARGADOR.getPropiedad(ConstantesBD.ACTUALIZAR_PELICULA);
             obtenerPeliculaSQL = CARGADOR.getPropiedad(ConstantesBD.OBTENER_PELICULA);
-        } catch (IOException ex) {
+        } catch (IOException | URISyntaxException ex) {
             System.out.println("Hubo un error al cargar el archivo de propiedades: "
                     + ex.getMessage());
         }
@@ -89,7 +92,7 @@ public class PeliculaDAOImpl implements PeliculaDAO {
             throw new BDException("Hubo un error al cargar el classPath", ex);
         } catch (SQLException ex) {
             throw new BDException("Hubo un error de persistencia al tratar "
-                    + "de obtener las peliculas, mensaje: ".concat(ex.getMessage()), ex);
+                    + "de obtener las peliculas.", ex);
         } finally {
             this.getConexionDB().cerrarConexion();
             this.getConexionDB().cerrarPreparedStatement(preparedStam);

@@ -139,8 +139,8 @@ public class EditarPelicula extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jAñoP)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTFAñoP, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103))))
+                        .addComponent(jTFAñoP, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69))))
             .addGroup(jPEditarPeliculaLayout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jLabelInformacion)
@@ -277,7 +277,7 @@ public class EditarPelicula extends javax.swing.JDialog {
     }
     
     private void cargarPeliculaSeleccionada(Pelicula peliculaS){
-        String fechaConvertida = (peliculaS.getAño() == null) ? "" : String.valueOf(peliculaS.getAño());
+        String fechaConvertida = (peliculaS.getAño() == null) ? "" : dateUtil.convertirDateAString(peliculaS.getAño());
         String descripcionConvertida = (peliculaS.getDescripcion() == null || 
                 "null".equals(peliculaS.getDescripcion())) ? "" : peliculaS.getDescripcion();
         
