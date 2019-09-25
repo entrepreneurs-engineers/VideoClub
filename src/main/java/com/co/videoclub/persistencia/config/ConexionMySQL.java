@@ -20,7 +20,7 @@ public class ConexionMySQL implements Conexion {
     private static final String DATA_BASE = "database";
     private static final String USUARIO = "dbuser";
     private static final String PASSWORD = "dbpassword";
-    private static final String FILE_PROPERTIES = "config_db.properties";
+    private static final String FILE_PROPERTIES = "src/main/Resources/config_db.properties";
     private Connection conexion = null;
     private static String dataBase;
     private static String usuario;
