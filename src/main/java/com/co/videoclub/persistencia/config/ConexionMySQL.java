@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.co.videoclub.util.CargarPropiedades;
+import com.co.videoclub.util.LoggerApp;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,8 +35,7 @@ public class ConexionMySQL implements Conexion {
             usuario = CARGADOR.getPropiedad(USUARIO);
             password = CARGADOR.getPropiedad(PASSWORD);
         } catch (IOException | URISyntaxException ex) {
-            System.out.println("Hubo un error al cargar el archivo de propiedades: "
-                    + ex.getMessage());
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cargar el archivo de propiedades", ex);
         }
     }
 
@@ -56,8 +56,8 @@ public class ConexionMySQL implements Conexion {
                 conexion.close();
             }
         } catch (SQLException ex) {
-            System.out.println("Hubo un error al cerrar la conexion: "
-                    + ex.getMessage());
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cerrar la conexion: "
+                    + ex.getMessage(), ex);
         }
     }
 
@@ -68,8 +68,8 @@ public class ConexionMySQL implements Conexion {
                 preparedStam.close();
             }
         } catch (SQLException ex) {
-            System.out.println("Hubo un error al cerrar el preparedStament: "
-                    + ex.getMessage());
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cerrar el preparedStament: "
+                    + ex.getMessage(), ex);
         }
     }
 
@@ -80,8 +80,8 @@ public class ConexionMySQL implements Conexion {
                 resultSet.close();
             }
         } catch (SQLException ex) {
-            System.out.println("Hubo un error al cerrar el preparedStament: "
-                    + ex.getMessage());
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cerrar el ResultSet: "
+                    + ex.getMessage(), ex);
         }
     }
 }
