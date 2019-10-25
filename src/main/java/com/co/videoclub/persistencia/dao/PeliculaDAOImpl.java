@@ -14,6 +14,8 @@ import com.co.videoclub.persistencia.dto.Categoria;
 import com.co.videoclub.persistencia.dto.Pelicula;
 import com.co.videoclub.util.CargarPropiedades;
 import com.co.videoclub.util.ConstantesBD;
+import com.co.videoclub.util.LoggerApp;
+import java.net.URISyntaxException;
 import java.sql.Date;
 
 /**
@@ -33,15 +35,15 @@ public class PeliculaDAOImpl implements PeliculaDAO {
 
     static {
         try {
+            LoggerApp.info("PeliculaDAOImpl - Cargando archivo de propiedades");
             CARGADOR.cargarPropiedades(ConstantesBD.QUERYS_PROPERTIES);
             verPeliculasSQL = CARGADOR.getPropiedad(ConstantesBD.VER_PELICULAS_SQL);
             obtenerCategoriasSQL = CARGADOR.getPropiedad(ConstantesBD.OBTENER_CATEGORIAS_SQL);
             insertarPeliculaSQL = CARGADOR.getPropiedad(ConstantesBD.INSERTAR_PELICULA);
             actualizarPeliculaSQL = CARGADOR.getPropiedad(ConstantesBD.ACTUALIZAR_PELICULA);
             obtenerPeliculaSQL = CARGADOR.getPropiedad(ConstantesBD.OBTENER_PELICULA);
-        } catch (IOException ex) {
-            System.out.println("Hubo un error al cargar el archivo de propiedades: "
-                    + ex.getMessage());
+        } catch (IOException | URISyntaxException ex) {
+            LoggerApp.severe("Hubo un error al cargar el archivo de propiedades", ex);
         }
     }
 
@@ -62,6 +64,7 @@ public class PeliculaDAOImpl implements PeliculaDAO {
 
     @Override
     public List<Pelicula> obtenerPeliculas() throws BDException {
+        LoggerApp.info("PeliculaDAOImpl - Intentando obtener todas las peliculas");
         List<Pelicula> peliculas = new ArrayList<>();
         PreparedStatement preparedStam = null;
         ResultSet rs = null;
@@ -86,10 +89,13 @@ public class PeliculaDAOImpl implements PeliculaDAO {
                 peliculas.add(pelicula);
             }
         } catch (ClassNotFoundException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error al cargar el classPath", ex);
             throw new BDException("Hubo un error al cargar el classPath", ex);
         } catch (SQLException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error de persistencia al tratar "
+                    + "de obtener las peliculas.", ex);
             throw new BDException("Hubo un error de persistencia al tratar "
-                    + "de obtener las peliculas, mensaje: ".concat(ex.getMessage()), ex);
+                    + "de obtener las peliculas.", ex);
         } finally {
             this.getConexionDB().cerrarConexion();
             this.getConexionDB().cerrarPreparedStatement(preparedStam);
@@ -110,8 +116,11 @@ public class PeliculaDAOImpl implements PeliculaDAO {
             preparedStam.setInt(5, pelicula.getCategoria().getId());
             preparedStam.executeUpdate();
         } catch (ClassNotFoundException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error al cargar el classPath", ex);
             throw new BDException("Hubo un error al cargar el classPath", ex);
         } catch (SQLException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error de persistencia al tratar "
+                    + "de obtener las peliculas.", ex);
             throw new BDException("Hubo un error de persistencia al tratar "
                     + "de obtener las peliculas", ex);
         } finally {
@@ -137,8 +146,11 @@ public class PeliculaDAOImpl implements PeliculaDAO {
                 categorias.add(categoria);
             }
         } catch (ClassNotFoundException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error al cargar el classPath", ex);
             throw new BDException("Hubo un error al cargar el classPath", ex);
         } catch (SQLException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error de persistencia al tratar "
+                    + "de obtener las peliculas.", ex);
             throw new BDException("Hubo un error de persistencia al tratar "
                     + "de obtener las peliculas", ex);
         } finally {
@@ -163,8 +175,11 @@ public class PeliculaDAOImpl implements PeliculaDAO {
 
             preparedStam.executeUpdate();
         } catch (ClassNotFoundException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error al cargar el classPath", ex);
             throw new BDException("Hubo un error al cargar el classPath", ex);
         } catch (SQLException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error de persistencia al tratar "
+                    + "de obtener las peliculas.", ex);
             throw new BDException("Hubo un error de persistencia al tratar "
                     + "de obtener las peliculas", ex);
         } finally {
@@ -198,8 +213,11 @@ public class PeliculaDAOImpl implements PeliculaDAO {
                 pelicula.setCategoria(categoriaP);
             }
         } catch (ClassNotFoundException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error al cargar el classPath", ex);
             throw new BDException("Hubo un error al cargar el classPath", ex);
         } catch (SQLException ex) {
+            LoggerApp.severe("PeliculaDAOImpl - Hubo un error de persistencia al tratar "
+                    + "de obtener las peliculas.", ex);
             throw new BDException("Hubo un error de persistencia al tratar "
                     + "de obtener las peliculas", ex);
         } finally {

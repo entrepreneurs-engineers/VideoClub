@@ -10,7 +10,7 @@ public class ConstantesBD {
     /*
     * Constantes para BD MySQL
     */
-    public static final String QUERYS_PROPERTIES = "sql/simples_querys.properties"; 
+    public static final String QUERYS_PROPERTIES = "src/main/Resources/sql/simples_querys.properties"; 
     public static final String VER_PELICULAS_SQL = "verpeliculas";
     public static final String OBTENER_CATEGORIAS_SQL = "obtenercategorias";
     public static final String INSERTAR_PELICULA = "insertarpelicula";

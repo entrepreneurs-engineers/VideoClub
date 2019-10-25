@@ -1,6 +1,7 @@
 package com.co.videoclub.util;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import org.junit.Test;
@@ -15,11 +16,12 @@ public class CargarPropiedadesTest {
 
     /**
      * Test que comprueba que el archivo de propiedades si cargo correctamente
+     * @throws java.net.URISyntaxException
      */
     @Test
-    public void conArchivoPropiedades() {
+    public void conArchivoPropiedades() throws URISyntaxException {
         try {
-            String fileProperties = "config_db_test.properties";
+            String fileProperties = "src/test/Resources/config_db_test.properties";
             CARGADOR.cargarPropiedades(fileProperties);
         } catch (IOException ex) {
             fail("No se encontró archivo, cod: " + ex.getMessage());
@@ -31,21 +33,23 @@ public class CargarPropiedadesTest {
      * una excepcion (IOException)
      *
      * @throws java.io.IOException
+     * @throws java.net.URISyntaxException
      */
     @Test(expected = IOException.class)
-    public void noExisteArchivoPropiedades() throws IOException {
-        String fileProperties = "config_db_test2s.properties";
+    public void noExisteArchivoPropiedades() throws IOException, URISyntaxException {
+        String fileProperties = "src/test/Resources/config_db_test2s.properties";
         CARGADOR.cargarPropiedades(fileProperties);
     }
 
     /**
      * Test que comprueba que si se envia una propiedad con key vacio, el valor
      * de la key será null
+     * @throws java.net.URISyntaxException
      */
     @Test
-    public void obtenerPropiedadVacia() {
+    public void obtenerPropiedadVacia() throws URISyntaxException {
         try {
-            String fileProperties = "config_db_test.properties";
+            String fileProperties = "src/test/Resources/config_db_test.properties";
             String DATA_BASE = "";
             CARGADOR.cargarPropiedades(fileProperties);
             String dataBase = CARGADOR.getPropiedad(DATA_BASE);
@@ -60,11 +64,12 @@ public class CargarPropiedadesTest {
     /**
      * Test que comprueba que si se envia una propiedad con key null, el valor
      * de la key será null
+     * @throws java.net.URISyntaxException
      */
     @Test
-    public void obtenerPropiedadNula() {
+    public void obtenerPropiedadNula() throws URISyntaxException {
         try {
-            String fileProperties = "config_db_test.properties";
+            String fileProperties = "src/test/Resources/config_db_test.properties";
             String DATA_BASE = null;
             CARGADOR.cargarPropiedades(fileProperties);
             String dataBase = CARGADOR.getPropiedad(DATA_BASE);
@@ -79,11 +84,12 @@ public class CargarPropiedadesTest {
     /**
      * Test que comprueba que todas las propiedades
      * esten correctas
+     * @throws java.net.URISyntaxException
      */
     @Test
-    public void obtenerPropiedadesCorrectas() {
+    public void obtenerPropiedadesCorrectas() throws URISyntaxException {
         try {
-            String fileProperties = "config_db_test.properties";
+            String fileProperties = "src/test/Resources/config_db_test.properties";
             String DATA_BASE = "database";
             String USUARIO = "dbuser";
             String PASSWORD = "dbpassword";

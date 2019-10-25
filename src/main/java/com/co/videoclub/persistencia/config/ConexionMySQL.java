@@ -7,6 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.co.videoclub.util.CargarPropiedades;
+import com.co.videoclub.util.LoggerApp;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +21,7 @@ public class ConexionMySQL implements Conexion {
     private static final String DATA_BASE = "database";
     private static final String USUARIO = "dbuser";
     private static final String PASSWORD = "dbpassword";
-    private static final String FILE_PROPERTIES = "config_db.properties";
+    private static final String FILE_PROPERTIES = "src/main/Resources/config_db.properties";
     private Connection conexion = null;
     private static String dataBase;
     private static String usuario;
@@ -30,9 +34,8 @@ public class ConexionMySQL implements Conexion {
             dataBase = CARGADOR.getPropiedad(DATA_BASE);
             usuario = CARGADOR.getPropiedad(USUARIO);
             password = CARGADOR.getPropiedad(PASSWORD);
-        } catch (IOException ex) {
-            System.out.println("Hubo un error al cargar el archivo de propiedades: "
-                    + ex.getMessage());
+        } catch (IOException | URISyntaxException ex) {
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cargar el archivo de propiedades", ex);
         }
     }
 
@@ -53,8 +56,8 @@ public class ConexionMySQL implements Conexion {
                 conexion.close();
             }
         } catch (SQLException ex) {
-            System.out.println("Hubo un error al cerrar la conexion: "
-                    + ex.getMessage());
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cerrar la conexion: "
+                    + ex.getMessage(), ex);
         }
     }
 
@@ -65,8 +68,8 @@ public class ConexionMySQL implements Conexion {
                 preparedStam.close();
             }
         } catch (SQLException ex) {
-            System.out.println("Hubo un error al cerrar el preparedStament: "
-                    + ex.getMessage());
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cerrar el preparedStament: "
+                    + ex.getMessage(), ex);
         }
     }
 
@@ -77,8 +80,8 @@ public class ConexionMySQL implements Conexion {
                 resultSet.close();
             }
         } catch (SQLException ex) {
-            System.out.println("Hubo un error al cerrar el preparedStament: "
-                    + ex.getMessage());
+            LoggerApp.severe("ConexionMySQL - Hubo un error al cerrar el ResultSet: "
+                    + ex.getMessage(), ex);
         }
     }
 }
