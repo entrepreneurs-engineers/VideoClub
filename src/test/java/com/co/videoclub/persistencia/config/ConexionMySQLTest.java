@@ -35,7 +35,8 @@ public class ConexionMySQLTest {
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
      */
-    @Test(expected = SQLException.class)
+    @SuppressWarnings("unchecked")
+	@Test(expected = SQLException.class)
     public void testQue_lanzaSQLException_cuando_intentaObtenerConexion() throws ClassNotFoundException, SQLException{
         //DADO
         PowerMockito.mockStatic(DriverManager.class);

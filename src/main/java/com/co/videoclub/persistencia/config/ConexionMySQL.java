@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import com.co.videoclub.util.CargarPropiedades;
 import com.co.videoclub.util.LoggerApp;
 import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

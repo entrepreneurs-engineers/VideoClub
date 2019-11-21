@@ -13,7 +13,9 @@ package com.co.videoclub.exception;
  */
 public class BDException extends Exception{
 
-    public BDException(String string) {
+	private static final long serialVersionUID = 1L;
+
+	public BDException(String string) {
         super(string);
     }
 

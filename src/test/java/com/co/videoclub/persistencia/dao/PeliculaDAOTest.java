@@ -133,8 +133,6 @@ public class PeliculaDAOTest {
     
     @Test
     public void pruebaQue_devuelveCategorias() throws BDException, ClassNotFoundException, SQLException{
-        //DADO
-        Date fecha = new java.sql.Date(01201301L);
         ResultSet mockResultSet = Mockito.mock(ResultSet.class);
         PreparedStatement mockPreparedStatement = Mockito.mock(PreparedStatement.class);
         Connection mockConnection = Mockito.mock(Connection.class);

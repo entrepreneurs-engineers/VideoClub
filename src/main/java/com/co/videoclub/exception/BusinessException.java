@@ -8,7 +8,9 @@ package com.co.videoclub.exception;
  */
 public class BusinessException extends RuntimeException{
 
-    public BusinessException(String string) {
+	private static final long serialVersionUID = 1L;
+
+	public BusinessException(String string) {
         super(string);
     }
 

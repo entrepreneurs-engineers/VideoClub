@@ -1,7 +1,6 @@
 package com.co.videoclub.businesslogic.validaciones;
 
 import com.co.videoclub.persistencia.dto.Pelicula;
-import com.co.videoclub.util.ValidadorExpresiones;
 
 /**
  *
